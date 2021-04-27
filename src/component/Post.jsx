@@ -1,14 +1,14 @@
 import React from 'react'
 import Card from './Card'
-
+import Paper from '@material-ui/core/Paper'
 
 const Post = () =>{
 
 
     return(
-        <div class = "post">
-            Hello It's post!
-        </div>
+        <Paper>
+            <h3>Title</h3>
+        </Paper>
     )
 }
 

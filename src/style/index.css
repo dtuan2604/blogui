@@ -1,5 +1,4 @@
-.post{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+.MuiPaper-root{
+    width: 550px;
+    margin: auto;
 }
