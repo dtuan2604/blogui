@@ -1,16 +1,53 @@
 import superagent from 'superagent'
 
-export const retrievePost = () =>{
-
+export const retrievePost = async callback =>{
+    await superagent
+    .get('http://localhost:3001/home')
+    .end((err, res) => {
+        if (err){
+            console.error(err)
+            return
+        }
+        callback(res.body)
+    })
 }
 
-export const createPost = () =>{
-
+export const createPost = async (pokemon, title, text) =>{
+    await superagent
+    .post("http://localhost:3001/createBlog")
+    .send({ 
+        pokemon,
+        title,
+        text
+     })
+    .set('Content-Type','application/json')
+    .end((err,res) =>{
+        if(err){
+            console.error(err)
+            return
+        }
+    })
+    return
 }
-export const editPost = () =>{
-
+export const editPost = async (id, title, text) =>{
+    await superagent
+    .post("http://localhost:3001/updateBlog")
+    .send({ 
+        "_id": id,
+        title,
+        text
+     })
+    .set('Content-Type','application/json')
+    .end((err,res) =>{
+        if(err){
+            console.error(err)
+            return
+        }
+    })
+    return
 }
 
-export const deletePost = () => {
-    
+export const deletePost = async id => {
+    await superagent.delete(`http://localhost:3001/deleteBlog?id=${id}`)
+    return
 }
