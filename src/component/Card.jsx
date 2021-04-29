@@ -5,7 +5,7 @@ const Card = props => {
     const poke = props.poke
     if(props.poke.availability === true)
         return(
-            <div className="b">
+            <div className="b card">
                 <Flippy
                     flipOnHover={false} 
                     flipOnClick={true} 

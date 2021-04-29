@@ -28,13 +28,15 @@ const Post = props =>{
     }
 
     return(
-        <Paper>
+        <Paper className="post">
             { update ? 
             (<div>
                 <h3>{title}</h3>
-                <Card poke={props.poke} /> 
-                <div className={props.poke.availability ? "b text" : "b"}>
-                    <p>{text}</p>
+                <div className={props.poke.availability && "test"}>
+                    <Card poke={props.poke} /> 
+                    {/* <div > */}
+                        <p className={props.poke.availability ? "b text" : "b"}>{text}</p>
+                    {/* </div> */}
                 </div>
                 <br />
                 <button onClick={handleEditButton}>Edit</button>
@@ -44,9 +46,12 @@ const Post = props =>{
             (<div>
                 <input type="text" onChange={handleTitle} value={title} />
                 <br />
-                <Card poke={props.poke} />
-                <div className={props.poke.availability ? "b text" : "b"}>
-                    <input type="text" onChange={handleText} value={text}/>
+                <div className="test">
+                    <Card poke={props.poke} />
+                    <div className={props.poke.availability ? "b text" : "b"}>
+                        <textarea style={{width: '250px', minHeight:'300px'}}
+                        onChange={handleText} value={text}/>
+                    </div>
                 </div>
                 <button onClick={handleUpdateButton}>Update</button>
             </div>)}
