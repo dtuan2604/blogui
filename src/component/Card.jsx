@@ -24,7 +24,6 @@ const Card = props => {
                         <p><b>Name:</b> {poke.name}</p>
                         <p><b>Types:</b> {poke.types.map(type=>{return "'"+type+"' "})}</p>
                     </BackSide>
-
                 </Flippy>
             </div>
         )
