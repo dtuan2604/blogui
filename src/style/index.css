@@ -1,4 +1,4 @@
-.MuiPaper-root{
+.MuiPaper-root, .createButton{
     width: 550px;
     margin: auto;
     margin-bottom: 10px;
@@ -8,8 +8,21 @@
     display: inline-block;
     margin-left: 10px;
 }
-h3{
+h3, input{
     text-align: center;
+}
+input[radio]{
+    width: 100px;
+    margin: auto;
+    text-align: center;
+}
+input[text]{
+    margin-bottom: 10px;
+    width: 500px;
+}
+.result{
+    max-height:250px; 
+    overflow: auto;
 }
 .card{
     position: relative; 
@@ -17,13 +30,16 @@ h3{
     height: 300px;
 }
 .text{
-    width: 250px;
+    width: 300px;
     margin-top: 0px;
     word-wrap: break-word;
 }
 .test{
     min-height: 300px;
 }
-input{
-    margin-bottom: 10px;
+.result{
+    width: 450px;
+}
+label{
+    margin-right: 10px;
 }

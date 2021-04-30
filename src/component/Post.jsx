@@ -8,6 +8,7 @@ const Post = props =>{
     const [text, setText] = useState(props.text)
     const [update, setUpdate] = useState(false)
     const getPost = props.callback
+
     const handleEditButton = event =>{
         setUpdate(true)
     }
@@ -28,13 +29,13 @@ const Post = props =>{
     }
 
     return(
-        <Paper className="post">
+        <Paper>
             { update ? 
             (<div>
                 <input type="text" onChange={handleTitle} value={title} />
                 <br />
                 <div className="test">
-                    <Card poke={props.poke} />
+                    <Card poke={props.poke} style={{ width: '200px', height: '300px'}} />
                     <div className={props.poke.availability ? "b text" : "b"}>
                         <textarea style={{width: '250px', minHeight:'300px'}}
                         onChange={handleText} value={text}/>
@@ -44,7 +45,7 @@ const Post = props =>{
             </div>) :
             (<div>
                 <h3>{title}</h3>
-                <div className={props.poke.availability && "test"}>
+                <div className={props.poke.availability ? "test" : ""}>
                     <Card poke={props.poke} /> 
                     <p className={props.poke.availability ? "b text" : "b"}>{text}</p>
                 </div>

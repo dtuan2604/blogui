@@ -3,7 +3,7 @@ import Flippy, { FrontSide, BackSide } from 'react-flippy'
 
 const Card = props => {
     const poke = props.poke
-    if(props.poke.availability === true)
+    if(props.poke.availability === "true" || props.poke.availability === true)
         return(
             <div className="b card">
                 <Flippy

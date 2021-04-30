@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Post from './Post'
-import { retrievePost, createPost } from '../api/postAPI'
+import { retrievePost} from '../api/postAPI'
 import CreatePost from './CreatePost'
-import { post } from 'superagent'
 
 const Body = () =>{
     const[posts, setPost] = useState([])
@@ -16,7 +15,7 @@ const Body = () =>{
 
     return(
         <div>
-            <CreatePost />
+            <CreatePost callback={getPost}/>
             {posts.map(post=>{
                 return(
                 <Post key={post._id} 
