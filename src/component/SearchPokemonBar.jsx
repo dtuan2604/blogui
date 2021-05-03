@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { getCard } from '../api/cardAPI'
+import { getPoke } from '../api/cardAPI'
+import Button from '@material-ui/core/Button'
 
 
 const SearchPokemonBar = props =>{
@@ -12,8 +13,13 @@ const SearchPokemonBar = props =>{
     const handleText = event =>{
         setText(event.target.value)
     }
-    const handleClick = event => {
+    const handleSubmit= event => {
         setIds(text.trim().split(/\s+/))
+    }
+    const handleCancel = event => {
+        setText("")
+        setData([])
+        setClicked(false)
     }
     const onChangeValue = event =>{
         callback(data.find(poke =>{return poke.id === parseInt(event.target.value, 10)}))
@@ -21,42 +27,55 @@ const SearchPokemonBar = props =>{
     const handleClickbutton = event =>{
         setClicked(true)
     }
-
-    useEffect(()=>{
-        getCard(setData, ids)
-    }, [ ids])
-
-
     const result = data => {
-        return data.map(poke => {
-            if (poke.name === 'notfound')
-                poke = {
-                    ...poke,
-                    name: "notfound",
-                    types: ["notfound"]
-                }      
+        return data.filter(poke => poke.name !== 'notfound')
+        .map(poke => {
             return(
-                <span key={poke.id}>
-                    <img src={poke.img} width='80px' height='80px' key={poke.img} alt={poke.name} />
+                <div key={poke.id} className="smallcard">
+                    <img src={poke.img} width='90px' height='90px' key={poke.img} alt={poke.name} />
+                    <br />
                     <input type="radio" value={poke.id} name="pokemon" onChange={onChangeValue}/>
-                </span>
+                </div>
             )})
     }
+    const message = data =>{
+        return data.filter(poke => poke.name === 'notfound')
+                    .map(poke =>{
+                        return(
+                        <p className="errorMessage" key={poke.id}>
+                            Pokemon with name or id by "{poke.id}" is not existed
+                        </p>)
+                    })
+    }
+
+    useEffect(()=>{
+        getPoke(setData, ids)
+    }, [ ids ])
 
     return(
-        <div>
+        <div className="pokeBar">
             {clicked ? 
             (<div>
-                <p>Please enter the id(s) separately by whitespace</p>
+                <p><b>Please enter the id(s) or name separately by whitespace</b></p>
                 <input type="text" value={text} onChange={handleText} />
-                <button onClick={handleClick}>Submit</button>
+                <Button variant="outlined" color="primary" 
+                        disabled={(text === "") ? true : false } 
+                        style={{marginLeft: '5px', marginRight: '5px'}}
+                        onClick={handleSubmit}>
+                            Submit
+                </Button>
+                <Button variant="outlined" color="secondary"
+                    onClick={handleCancel}>
+                        Cancel
+                </Button>
                 <br />
                 <div className="result">
+                    {message(data)}
                     {result(data)}
                 </div>
             </div>):
             (
-                <button onClick={handleClickbutton}>Add Pokemon</button>
+                <Button variant="outlined" onClick={handleClickbutton}>Add Pokemon</Button>
             )}
         </div>
         )

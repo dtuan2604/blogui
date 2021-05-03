@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import SearchPokemonBar from './SearchPokemonBar'
-import Paper from '@material-ui/core/Paper'
+import { Paper, Button } from '@material-ui/core'
 import { createPost } from '../api/postAPI'
 
 
@@ -20,12 +20,17 @@ const CreatePost = props =>{
     const handleText = event =>{
         setText(event.target.value)
     }
-    const handleSubmit = event => {
-        createPost(pokemon, title, text)
+    const handleSubmit = async event => {
+        await createPost(pokemon, title, text)
         setText("")
         setTitle("")
         setCreate(false)
         getPost()
+    }
+    const handleCancel = event =>{
+        setText("")
+        setTitle("")
+        setCreate(false)
     }
     const callback = poke =>{
         setPokemon(poke)
@@ -35,20 +40,31 @@ const CreatePost = props =>{
         <div>
         {create ? 
         (
-            <Paper>
+            <Paper className="create">
                 <SearchPokemonBar callback={callback} />
                 <br />
                 <label>Title:</label>
                 <input type="text" value={title} style={{width: '400px'}} onChange={handleTitle}/>
                 <br />
-                <textarea style={{marginTop: '10px', width: '530px', height: '200px'}} 
+                <textarea style={{marginTop: '10px', marginLeft: '10px', width: '520px', height: '200px'}} 
                     value={text} onChange={handleText} />
-                <button onClick={handleSubmit}>Post</button>
+                <div className="groupButton">
+                    <Button variant="outlined" color="primary" style={{width: "90px"}}
+                        disabled={(text === "" || title === "") ? true : false } 
+                        onClick={handleSubmit}>
+                            Post
+                    </Button>
+                    <Button style={{marginTop: '5px'}} 
+                        variant="outlined" color="secondary"
+                        onClick={handleCancel}>
+                            Cancel
+                    </Button>
+                </div>
             </Paper>
         ):
         (
-            <div className="createButton">
-                <button onClick={handleCreateButton}>Create Post</button>
+            <div className="create">
+                <Button variant="outlined" onClick={handleCreateButton}>Create Post</Button>
             </div>
         )}
         </div> 

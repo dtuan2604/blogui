@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Body from './component/Body'
+import Body from './container/Body'
 import './style/index.css'
 
 const BlogContainer = () =>{
     return(
         <div>
+            <div id="navbar">POKEMON</div>
             <Body />
         </div>
     )

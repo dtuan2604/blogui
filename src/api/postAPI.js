@@ -1,16 +1,10 @@
 import superagent from 'superagent'
 
 export const retrievePost = async callback =>{
-    await superagent
-    .get('http://localhost:3001/home')
-    .end((err, res) => {
-        if (err){
-            console.error(err)
-            return
-        }
-        callback(res.body)
-    })
+    const { body } = await superagent.get('http://localhost:3001/home')
+    callback(body)
 }
+
 
 export const createPost = async (pokemon, title, text) =>{
     await superagent

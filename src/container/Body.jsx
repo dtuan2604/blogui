@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from 'react'
 import Post from './Post'
-import { retrievePost} from '../api/postAPI'
-import CreatePost from './CreatePost'
+import { retrievePost } from '../api/postAPI'
+import CreatePost from '../component/CreatePost'
 
 const Body = () =>{
-    const[posts, setPost] = useState([])
+    const[posts, setPosts] = useState([])
 
-    const getPost = () =>{
-        retrievePost(setPost)
+    const getPost = ()=>{
+        retrievePost(setPosts)
     }
     useEffect(()=>{
         getPost()
-    },[posts])
+    }, []) 
 
     return(
-        <div>
+        <div id="body">
             <CreatePost callback={getPost}/>
             {posts.map(post=>{
                 return(
@@ -22,8 +22,8 @@ const Body = () =>{
                     id={post._id}
                     title={post.title} 
                     text={post.text} 
-                    poke={post.pokemon} 
-                    callback={getPost}/>)
+                    poke={post.pokemon}
+                    callback={getPost} />)
             })}       
         </div>
     )

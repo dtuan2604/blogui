@@ -5,7 +5,7 @@ const Card = props => {
     const poke = props.poke
     if(props.poke.availability === "true" || props.poke.availability === true)
         return(
-            <div className="b card">
+            <div className="post card">
                 <Flippy
                     flipOnHover={false} 
                     flipOnClick={true} 
@@ -16,10 +16,12 @@ const Card = props => {
 
                     <FrontSide>
                         <img src={poke.img} alt={poke.name} width='200px' height='200px' />
-                        <p>Click to view poke's information</p>
+                        <p className="cardtext" style={{textAlign: 'center'}}>
+                            Click to view poke's information
+                        </p>
                     </FrontSide>
 
-                    <BackSide>
+                    <BackSide className="cardtext">
                         <p><b>ID:</b> {poke.id}</p>
                         <p><b>Name:</b> {poke.name}</p>
                         <p><b>Types:</b> {poke.types.map(type=>{return "'"+type+"' "})}</p>
@@ -28,7 +30,7 @@ const Card = props => {
             </div>
         )
     else 
-        return(<div></div>)
+        return(<span></span>)
 }
 
 export default Card

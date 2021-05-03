@@ -1,6 +1,6 @@
 import superagent from 'superagent'
 
-export const getCard = (callback, idarray) => {
+export const getPoke = (callback, idarray) => {
     const url = "http://localhost:3001/pokemon"
     superagent
     .post(url)
