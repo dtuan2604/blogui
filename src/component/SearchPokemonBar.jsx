@@ -2,13 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { getPoke } from '../api/cardAPI'
 import Button from '@material-ui/core/Button'
 
-
 const SearchPokemonBar = props =>{
     const [data, setData] = useState([])
     const [ids, setIds] = useState([])
     const [text, setText] = useState("")
     const [clicked, setClicked] = useState(false)
-    const callback = props.callback
+    const setPokemon = props.callback
 
     const handleText = event =>{
         setText(event.target.value)
@@ -19,10 +18,11 @@ const SearchPokemonBar = props =>{
     const handleCancel = event => {
         setText("")
         setData([])
+        setPokemon({})
         setClicked(false)
     }
     const onChangeValue = event =>{
-        callback(data.find(poke =>{return poke.id === parseInt(event.target.value, 10)}))
+        setPokemon(data.find(poke =>{return poke.id === parseInt(event.target.value, 10)}))
     }
     const handleClickbutton = event =>{
         setClicked(true)

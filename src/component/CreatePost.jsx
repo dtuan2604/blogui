@@ -3,7 +3,6 @@ import SearchPokemonBar from './SearchPokemonBar'
 import { Paper, Button } from '@material-ui/core'
 import { createPost } from '../api/postAPI'
 
-
 const CreatePost = props =>{
     const [create, setCreate] = useState(false)
     const [title, setTitle] = useState("")
@@ -24,16 +23,15 @@ const CreatePost = props =>{
         await createPost(pokemon, title, text)
         setText("")
         setTitle("")
+        setPokemon({})
         setCreate(false)
         getPost()
     }
     const handleCancel = event =>{
         setText("")
         setTitle("")
+        setPokemon({})
         setCreate(false)
-    }
-    const callback = poke =>{
-        setPokemon(poke)
     }
 
     return(
@@ -41,7 +39,7 @@ const CreatePost = props =>{
         {create ? 
         (
             <Paper className="create">
-                <SearchPokemonBar callback={callback} />
+                <SearchPokemonBar callback={setPokemon} />
                 <br />
                 <label>Title:</label>
                 <input type="text" value={title} style={{width: '400px'}} onChange={handleTitle}/>
@@ -69,7 +67,6 @@ const CreatePost = props =>{
         )}
         </div> 
     )
-
 }
 
 export default CreatePost
