@@ -9,6 +9,7 @@ const CreatePost = props =>{
     const [text, setText] = useState("")
     const [pokemon, setPokemon] = useState({})
     const getPost = props.callback
+    const loading = props.loading
 
     const handleCreateButton = event =>{
         setCreate(true)
@@ -62,7 +63,7 @@ const CreatePost = props =>{
         ):
         (
             <div className="create">
-                <Button variant="outlined" onClick={handleCreateButton}>Create Post</Button>
+                <Button variant="outlined" disabled={loading} onClick={handleCreateButton}>Create Post</Button>
             </div>
         )}
         </div> 

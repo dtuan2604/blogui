@@ -2,7 +2,8 @@ body{
     background-image: url("./backgroundimg/3.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    
+    background-position: center center;
+    background-size: cover;
 }
 input[type=radio]{
     display: inline;

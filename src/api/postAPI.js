@@ -1,14 +1,22 @@
 import superagent from 'superagent'
+import { port } from './port.js'
 
-export const retrievePost = async callback =>{
-    const { body } = await superagent.get('http://localhost:3001/home')
-    callback(body)
+export const retrievePost = async (props) =>{
+    const { setPosts, setLoading } = props
+    try{
+        setLoading(true)
+        const { body } = await superagent.get(`${port}/home`)
+        setPosts(body)
+        setLoading(false)
+    } catch(e){
+        console.error(e)
+    }
 }
 
 
 export const createPost = async (pokemon, title, text) =>{
     await superagent
-    .post("http://localhost:3001/createBlog")
+    .post(`${port}/createBlog`)
     .send({ 
         pokemon,
         title,
@@ -25,7 +33,7 @@ export const createPost = async (pokemon, title, text) =>{
 }
 export const editPost = async (id, title, text) =>{
     await superagent
-    .post("http://localhost:3001/updateBlog")
+    .post(`${port}/updateBlog`)
     .send({ 
         "_id": id,
         title,
@@ -42,6 +50,6 @@ export const editPost = async (id, title, text) =>{
 }
 
 export const deletePost = async id => {
-    await superagent.delete(`http://localhost:3001/deleteBlog?id=${id}`)
+    await superagent.delete(`${port}/deleteBlog?id=${id}`)
     return
 }

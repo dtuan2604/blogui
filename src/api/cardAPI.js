@@ -1,7 +1,8 @@
 import superagent from 'superagent'
+import { port } from './port.js'
 
 export const getPoke = (callback, idarray) => {
-    const url = "http://localhost:3001/pokemon"
+    const url = `${port}/pokemon`
     superagent
     .post(url)
     .send({ ids: idarray })
